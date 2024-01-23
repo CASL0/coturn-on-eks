@@ -33,6 +33,9 @@ locals {
   azs      = slice(data.aws_availability_zones.available.names, 0, 2)
   vpc_cidr = "10.0.0.0/16"
 
+  reloader_chart_url     = "https://stakater.github.io/stakater-charts"
+  reloader_chart_version = "v1.0.63"
+
   tags = {
     Terraform   = "true"
     Environment = "staging"
@@ -124,6 +127,17 @@ module "addons" {
   enable_aws_load_balancer_controller = true
   enable_metrics_server               = true
   enable_cert_manager                 = true
+
+  helm_releases = {
+    reloader = {
+      chart            = "reloader"
+      chart_version    = local.reloader_chart_version
+      repository       = local.reloader_chart_url
+      name             = "reloader"
+      namespace        = "reloader"
+      create_namespace = true
+    }
+  }
 
   tags = local.tags
 }
