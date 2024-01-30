@@ -31,7 +31,9 @@
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_password"></a> [password](#input\_password) | coturn auth password | `string` | n/a | yes |
 
 ## Outputs
 

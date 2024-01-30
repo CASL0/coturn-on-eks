@@ -36,6 +36,9 @@ locals {
   reloader_chart_url     = "https://stakater.github.io/stakater-charts"
   reloader_chart_version = "v1.0.63"
 
+  coturn_chart_url     = "https://casl0.github.io/coturn-chart/"
+  coturn_chart_version = "4.5.0"
+
   tags = {
     Terraform   = "true"
     Environment = "staging"
@@ -136,6 +139,48 @@ module "addons" {
       name             = "reloader"
       namespace        = "reloader"
       create_namespace = true
+    }
+    coturn = {
+      chart            = "coturn"
+      chart_version    = local.coturn_chart_version
+      repository       = local.coturn_chart_url
+      name             = "coturn"
+      namespace        = "coturn"
+      create_namespace = true
+      values = [
+        yamlencode(
+          {
+            coturn = {
+              realm = "turn.casl0.com"
+              ports = {
+                min = 40000
+                max = 40100
+              }
+              auth = {
+                username = "coturn"
+                password = var.password
+              }
+            }
+            service = {
+              type = "LoadBalancer"
+              annotations = {
+                "service.beta.kubernetes.io/aws-load-balancer-type"            = "nlb"
+                "service.beta.kubernetes.io/aws-load-balancer-scheme"          = "internet-facing"
+                "service.beta.kubernetes.io/aws-load-balancer-nlb-target-type" = "ip"
+              }
+            }
+            podAnnotations = {
+              "reloader.stakater.com/auto" = "true"
+            }
+            resources = {
+              requests = {
+                cpu    = "10m"
+                memory = "2Gi"
+              }
+            }
+          }
+        )
+      ]
     }
   }
 
