@@ -1,4 +1,11 @@
 # coturn-on-eks
+
+EKS上にcoturnをデプロイします。
+
+## 構成図
+
+![infra](https://github.com/CASL0/coturn-on-eks/assets/28913760/348a9b92-7a37-4bdd-a346-0d2027769d89)
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
