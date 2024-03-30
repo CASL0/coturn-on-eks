@@ -1,11 +1,12 @@
 # coturn-on-eks
 
-EKS上にcoturnをデプロイします。
+EKS 上に coturn をデプロイします。
 
 ## 構成図
 
-![infra](https://github.com/CASL0/coturn-on-eks/assets/28913760/348a9b92-7a37-4bdd-a346-0d2027769d89)
+![infra](https://github.com/CASL0/coturn-on-eks/assets/28913760/b11a73bc-f8f3-4b16-b75c-f332b5123fb5)
 
+<!-- prettier-ignore-start -->
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -49,3 +50,4 @@ EKS上にcoturnをデプロイします。
 | <a name="output_azs"></a> [azs](#output\_azs) | Availability Zones |
 | <a name="output_eks_cluster_arn"></a> [eks\_cluster\_arn](#output\_eks\_cluster\_arn) | The ARN of the EKS cluster |
 <!-- END_TF_DOCS -->
+<!-- prettier-ignore-end -->
